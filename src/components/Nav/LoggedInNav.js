@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import ProfileOptionBlock from './ProfileOptionBlock';
 
-const Nav = () => {
+const LoggedInNav = () => {
+  const [userData, setUserData] = useState({});
+  const [isShowOption, setIsShowOption] = useState(false);
+
   const navigate = useNavigate();
+
+  const onLogOut = () => {
+    localStorage.removeItem('token');
+  };
+
+  const showOptions = () => {
+    setIsShowOption(prev => !prev);
+  };
+
+  useEffect(() => {
+    fetch('data/UserInfo.json') // REMIND: 백엔드와 계정 관련 데이터 소통 필요(토근 X)
+      .then(res => res.json())
+      .then(data => {
+        setUserData(data);
+      });
+  }, []);
 
   const movePage = path => {
     navigate(path);
@@ -27,14 +47,17 @@ const Nav = () => {
           >
             프로젝트 올리기
           </GoToPost>
-          <GoToLogin
+          <HeartIcon src="/images/Nav/heartIcon.png" alt="" />
+          <BellIcon src="/images/Nav/notificationIcon.png" alt="Bell" />
+          <UserOption
             onClick={() => {
-              movePage('/login');
+              showOptions();
             }}
           >
             <ProfileIcon src="images/Nav/profileIcon.png" alt="profile" />
-            <LoginButton>로그인/회원가입</LoginButton>
-          </GoToLogin>
+            {userData.length > 0 && <UserName>{userData[0].nickname}</UserName>}
+          </UserOption>
+          {isShowOption && <ProfileOptionBlock onLogOut={onLogOut} />}
         </ButtonBox>
       </NavBar>
     </Header>
@@ -86,18 +109,27 @@ const GoToPost = styled.span`
   font-size: 14px;
 `;
 
-const GoToLogin = styled.div`
-  cursor: pointer;
+const UserOption = styled.div`
   display: flex;
   margin-left: 20px;
   border: 1px solid #dfdfdf;
   border-radius: 4px;
+  cursor: pointer;
 `;
 
-const LoginButton = styled.div`
+const UserName = styled.div`
   font-size: 15px;
   padding-top: 14px;
   padding-right: 15px;
 `;
 
-export default Nav;
+const HeartIcon = styled.img`
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  margin-left: 20px;
+`;
+
+const BellIcon = styled(HeartIcon)``;
+
+export default LoggedInNav;

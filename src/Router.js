@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main/Main";
-import Login from "./pages/Login/Login";
-import Detail from "./pages/Detail/Detail";
-import Post from "./pages/Post/Post";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Main from './pages/Main/Main';
+import Login from './pages/Login/Login';
+import Detail from './pages/Detail/Detail';
+import Post from './pages/Post/Post';
 
 const Router = () => {
   return (

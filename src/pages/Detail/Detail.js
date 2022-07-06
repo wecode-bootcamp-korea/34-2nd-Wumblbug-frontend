@@ -11,16 +11,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import ProjectBudjet from './ProjectBudjet';
 import { Link } from 'react-scroll';
+import axios from 'axios';
+import Footer from '../../components/Footer/Footer';
 
 const Detail = () => {
   const [detailData, setDetailData] = useState({});
 
   useEffect(() => {
-    fetch('data/detailData.json')
-      .then(res => res.json())
-      .then(result => {
-        setDetailData(result.results);
-      });
+    axios.get('data/detailData.json').then(res => {
+      setDetailData(res.data.results);
+    });
   }, []);
 
   const {
@@ -40,17 +40,12 @@ const Detail = () => {
     introduction,
   } = detailData;
 
-  const [likeContent, setLikeContent] = useState({
-    heart: false,
-    likesCount: like_count,
-  });
-
   const likeCountUp = () => {
-    if (!likeContent.heart) {
-      setLikeContent({ heart: true, likesCount: like_count + 1 });
-    } else {
-      setLikeContent({ heart: false, likesCount: like_count });
-    }
+    setDetailData(prevData => {
+      prevData.isLike = !prevData.isLike;
+      prevData.isLike ? prevData.like_count++ : prevData.like_count--;
+      return { ...prevData };
+    });
   };
   let totalPrice;
   let discount;
@@ -124,12 +119,12 @@ const Detail = () => {
                 </div>
                 <S.ButtonBox>
                   <S.HeartBtn onClick={likeCountUp}>
-                    {!likeContent.heart ? (
-                      <FontAwesomeIcon icon={faHeartBroken} />
-                    ) : (
+                    {detailData.isLike ? (
                       <FontAwesomeIcon icon={faHeart} />
+                    ) : (
+                      <FontAwesomeIcon icon={faHeartBroken} />
                     )}
-                    <span>{likeContent.likesCount}</span>
+                    <span>{like_count}</span>
                   </S.HeartBtn>
                   <S.ShareBtn>
                     <FontAwesomeIcon icon={faShareNodes} />
@@ -152,53 +147,9 @@ const Detail = () => {
           <ProjectBudjet budjet_plan={budget_plan} />
         </>
       )}
+      <Footer />
     </S.DetailWrap>
   );
 };
 
 export default Detail;
-
-// const DETAIL_DATA = {
-//   results: {
-//     id: 1,
-//     thumbmail:
-//       'https://greeneeds.s3.ap-northeast-2.amazonaws.com/img/jewellery1.webp',
-//     category: '쥬얼리',
-//     title: '블루 오션 팔찌',
-//     like_count: 0,
-//     target_amount: 500000,
-//     price: 57000,
-//     start_datetime: '2022-07-06',
-//     end_datetime: '2022-12-06',
-//     pay_end_date: '2022-12-17',
-//     settlement_date: '2022-12-07',
-//     introduction:
-//       '금과 은, 보석을 채굴하는 과정에서 발생하는 노동을 줄이고, 탄소 중립을 위하여 재활용된 금과 은, 보석을 사용하여 지구 친화적이고 지속가능한 제품을 생산',
-//     budget_plan: '원단 구입,부자재 구입,생산 공임비,배송 인건비,운임비',
-//     organizations: [
-//       {
-//         id: 1,
-//         name: '클린오션',
-//       },
-//       {
-//         id: 2,
-//         name: '월드피스',
-//       },
-//       {
-//         id: 3,
-//         name: '그린비젼',
-//       },
-//     ],
-//     images: [
-//       {
-//         id: 2,
-//         url: 'https://greeneeds.s3.ap-northeast-2.amazonaws.com/img/jewellery1.webp',
-//       },
-//       {
-//         id: 3,
-//         url: 'https://greeneeds.s3.ap-northeast-2.amazonaws.com/img/jewellery1_1.jpeg',
-//       },
-//     ],
-//     remain_days: 149,
-//   },
-// };

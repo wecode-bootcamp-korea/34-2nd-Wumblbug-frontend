@@ -4,6 +4,7 @@ import Main from './pages/Main/Main';
 import Login from './pages/Login/Login';
 import Detail from './pages/Detail/Detail';
 import Post from './pages/Post/Post';
+import KakaoLoading from './pages/Login/KakaoLoading';
 
 const Router = () => {
   return (
@@ -12,7 +13,8 @@ const Router = () => {
         <Route path="/main" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/detail" element={<Detail />} />
-        <Route path="/post" element={<Post />} />
+        <Route path="/post/*" element={<Post />} />
+        <Route path="/users/signin/kakao" element={<KakaoLoading />} />
       </Routes>
     </BrowserRouter>
   );

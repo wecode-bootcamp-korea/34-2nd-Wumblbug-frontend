@@ -31,9 +31,8 @@ const ProjectOptions = ({ title, price }) => {
         <S.OptionCheckBox>
           {Options.map(({ id, title, name }) => {
             return (
-              <S.OptionCheckBox>
+              <S.OptionCheckBox key={id}>
                 <S.OptionCheckInput
-                  key={id}
                   type="checkbox"
                   name={name}
                   onChange={handleChecked}

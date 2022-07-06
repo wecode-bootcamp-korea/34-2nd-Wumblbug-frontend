@@ -33,8 +33,6 @@ const Post = () => {
     setInfo({ ...info, [name]: number ? Number(value) : value });
   };
 
-  console.log(info);
-
   const token = localStorage.getItem('token');
   const sendAllInfo = async () => {
     const formData = new FormData();
@@ -51,14 +49,8 @@ const Post = () => {
       'Content-Type': 'multipart/form-data',
     };
 
-    // await axios.post(
-    //   'http://10.58.4.47:3000/projects/upload',
-    //   formData,
-    //   headers
-    // );
-
     await axios({
-      url: 'http://10.58.4.47:3000/projects/upload',
+      url: 'http://10.58.4.47:3000/projects',
       method: 'POST',
       data: formData,
       headers,

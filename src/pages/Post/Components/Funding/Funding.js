@@ -4,17 +4,28 @@ import * as S from './Funding.styled';
 import PriceCard from '../PriceCard/PriceCard';
 import Dates from '../Dates/Dates';
 
-const Funding = ({
-  info,
-  setInfo,
-  saveInfo,
-  setStartDate,
-  setEndDate,
-  setTargetAmount,
-}) => {
+const Funding = ({ info, setInfo, saveInfo, setStartDate, setEndDate }) => {
   const [inputValue, setInputValue] = useState(0);
 
-  // console.log(inputValue);
+  const totalPrice = Math.floor(inputValue * 0.92).toLocaleString('ko-KR', {
+    style: 'currency',
+    currency: 'KRW',
+  });
+
+  const totalCharge = Math.floor(inputValue * 0.08).toLocaleString('ko-KR', {
+    style: 'currency',
+    currency: 'KRW',
+  });
+
+  const payCharge = Math.floor(inputValue * 0.03).toLocaleString('ko-KR', {
+    style: 'currency',
+    currency: 'KRW',
+  });
+
+  const platformCharge = Math.floor(inputValue * 0.05).toLocaleString('ko-KR', {
+    style: 'currency',
+    currency: 'KRW',
+  });
 
   return (
     <S.FundingWrap>
@@ -30,28 +41,23 @@ const Funding = ({
                 placeholder="금액을 입력해주세요"
                 name="target_amount"
                 onChange={e => {
-                  // saveInfo(e);
                   saveInfo(e, true);
-                  // setTargetAmount(Number(e.target.value));
                   setInputValue(e.target.value);
                 }}
               />
               <S.PriceWrap>
                 <PriceCard
                   priceTitle="목표금액 달성시 예상 수령액"
-                  price={Math.floor(inputValue * 0.92)}
+                  price={totalPrice}
                 />
-                <PriceCard
-                  priceTitle="총 수수료"
-                  price={Math.floor(inputValue * 0.08)}
-                />
+                <PriceCard priceTitle="총 수수료" price={totalCharge} />
                 <PriceCard
                   priceTitle="결제대행 수수료 (총 결제액의 3%)"
-                  price={Math.floor(inputValue * 0.03)}
+                  price={payCharge}
                 />
                 <PriceCard
                   priceTitle="플랫폼 수수료 (총 모금액의 5%)"
-                  price={Math.floor(inputValue * 0.05)}
+                  price={platformCharge}
                 />
               </S.PriceWrap>
             </>

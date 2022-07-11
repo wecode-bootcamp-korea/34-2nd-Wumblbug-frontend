@@ -1,8 +1,8 @@
-[
-  {
-    "userId": 1,
+{
+  "RESULT": {
+    "user_id": 1,
     "nickname": "박희주",
     "email": "zero950@naver.com",
     "token": "dasfnjghawleg;asbnjl2nt!#^N236h24rnwe"
   }
-]
+}

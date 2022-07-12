@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
+import { URL } from '../../config';
 import ProfileOptionBlock from './ProfileOptionBlock';
 
 const LoggedInNav = () => {
@@ -13,15 +15,24 @@ const LoggedInNav = () => {
     localStorage.removeItem('token');
   };
 
+  const token = localStorage.getItem('token');
+
   const showOptions = () => {
     setIsShowOption(prev => !prev);
   };
 
   useEffect(() => {
-    fetch('data/UserInfo.json') // REMIND: 백엔드와 계정 관련 데이터 소통 필요(토근 X)
-      .then(res => res.json())
-      .then(data => {
-        setUserData(data);
+    axios
+      .get(`${URL}/users`, {
+        headers: {
+          Authorizaion: token,
+        },
+      })
+      .then(res => {
+        setUserData(res.data.RESULT);
+      })
+      .catch(err => {
+        console.error(err);
       });
   }, []);
 
@@ -55,7 +66,7 @@ const LoggedInNav = () => {
             }}
           >
             <ProfileIcon src="images/Nav/profileIcon.png" alt="profile" />
-            {userData.length > 0 && <UserName>{userData[0].nickname}</UserName>}
+            {userData && <UserName>{userData.nickname}</UserName>}
           </UserOption>
           {isShowOption && <ProfileOptionBlock onLogOut={onLogOut} />}
         </ButtonBox>

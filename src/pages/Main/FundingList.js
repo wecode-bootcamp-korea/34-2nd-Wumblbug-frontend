@@ -1,20 +1,14 @@
 import React from 'react';
-import Item from './Item';
 import styled from 'styled-components';
+import Item from './Item';
 import SelectOption from './SelectOption';
 
-const FundingList = ({ setFundingItems, fundingItems }) => {
+const FundingList = ({ fundingItems, sortByRecent, sortByLikes }) => {
   const sort = value => {
     if (value === 'date') {
-      const result = [...fundingItems].sort(
-        (a, b) => new Date(b.date) - new Date(a.date)
-      );
-      setFundingItems(result);
+      sortByRecent();
     } else if (value === 'like') {
-      const result = [...fundingItems].sort(
-        (a, b) => b.like_count - a.like_count
-      );
-      setFundingItems(result);
+      sortByLikes();
     }
   };
   return (
@@ -28,6 +22,7 @@ const FundingList = ({ setFundingItems, fundingItems }) => {
           thumbnail,
           category,
           title,
+          images,
           summary,
           target_amount,
           total_amount,
@@ -43,6 +38,7 @@ const FundingList = ({ setFundingItems, fundingItems }) => {
               category={category}
               title={title}
               summary={summary}
+              images={images}
               target_amount={target_amount}
               total_amount={total_amount}
               remain_days={remain_days}

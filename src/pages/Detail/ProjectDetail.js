@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './ProjectDetail.styled';
 import { Link } from 'react-scroll';
+import * as S from './ProjectDetail.styled';
 
 const ProjectDetail = () => {
   return (

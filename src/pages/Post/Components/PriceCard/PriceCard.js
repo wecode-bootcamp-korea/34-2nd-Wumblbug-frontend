@@ -4,8 +4,8 @@ import * as S from './PriceCard.styled';
 const PriceCard = ({ priceTitle, price }) => {
   return (
     <S.PriceCardWrap>
-      <S.PriceTitle>{priceTitle}</S.PriceTitle>
-      <S.PriceNumber>{price}</S.PriceNumber>
+      <span>{priceTitle}</span>
+      <span>{price}</span>
     </S.PriceCardWrap>
   );
 };

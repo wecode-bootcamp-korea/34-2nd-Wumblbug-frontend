@@ -34,8 +34,6 @@ export const SelectButton = styled.select`
   margin: auto 0;
 `;
 
-export const ProjectSection = styled.div``;
-
 export const InputWrap = styled.input`
   width: 630px;
   height: 50px;

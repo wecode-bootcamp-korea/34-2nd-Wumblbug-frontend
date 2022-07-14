@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Line } from 'rc-progress';
 import styled from 'styled-components';
 
@@ -11,9 +12,9 @@ const Item = ({
   target_amount,
   total_amount,
   remain_days,
-  date,
-  like_count,
 }) => {
+  const navigate = useNavigate();
+
   const calculatePercentage = (total_amount / target_amount) * 100;
   const percentage = (total_amount / target_amount).toLocaleString('en-US', {
     style: 'percent',
@@ -23,8 +24,16 @@ const Item = ({
     style: 'currency',
     currency: 'KRW',
   });
+  const goToDetail = () => {
+    navigate(`/detail/${id}`);
+  };
   return (
-    <ItemBox key={id}>
+    <ItemBox
+      key={id}
+      onClick={() => {
+        goToDetail();
+      }}
+    >
       <ItemImage src={thumbnail} alt="item" />
       <InfoBox>
         <ItemCategory>{category}</ItemCategory>

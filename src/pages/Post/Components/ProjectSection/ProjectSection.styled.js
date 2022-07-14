@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-export const ProjectSectionWrap = styled.div``;
-
 export const ContentsWrap = styled.div`
   width: 100%;
   height: 100%;

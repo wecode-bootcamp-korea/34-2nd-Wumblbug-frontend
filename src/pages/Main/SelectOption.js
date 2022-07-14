@@ -1,19 +1,19 @@
-import { Select } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
+import { Select } from 'antd';
 
 const { Option } = Select;
 const SelectOption = ({ sort }) => (
   <SelectWrapper>
     <Select
-      defaultValue="최신순"
+      defaultValue="정렬"
       style={{
         width: 120,
       }}
       onChange={sort}
     >
       <Option value="date" style={{ fontFamily: 'Gill Sans' }}>
-        최신순
+        등록 순
       </Option>
       <Option value="like" style={{ fontFamily: 'Gill Sans' }}>
         좋아요순

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import PostMain from './PostMain';
 import Default from './Components/Default/Default';
 import Funding from './Components/Funding/Funding';
-import axios from 'axios';
+import { API } from '../../config';
 
 const Post = () => {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [category, setCategory] = useState(1);
@@ -50,10 +52,13 @@ const Post = () => {
     };
 
     await axios({
-      url: 'http://10.58.4.47:3000/projects',
+      url: `${API.POST}`,
       method: 'POST',
       data: formData,
       headers,
+    }).then(res => {
+      alert('등록 완료!');
+      navigate('/');
     });
   };
 

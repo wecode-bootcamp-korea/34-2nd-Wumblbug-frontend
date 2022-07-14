@@ -7,6 +7,8 @@ export const SaveButtonWrap = styled.div`
   justify-content: flex-end;
   position: sticky;
   top: 0;
+  z-index: 100;
+  background-color: white;
 `;
 
 export const SaveButton = styled.div`
@@ -16,7 +18,6 @@ export const SaveButton = styled.div`
   color: white;
   text-align: center;
   line-height: 60px;
-  position: sticky;
   cursor: pointer;
 
   &:hover {
@@ -41,6 +42,7 @@ export const FixedContentWrap = styled.div`
   height: 60px;
   border-bottom: 1px solid #ddd;
   background-color: white;
+  z-index: 100;
 `;
 
 export const TabItems = styled.div`

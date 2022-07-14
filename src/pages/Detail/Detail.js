@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import * as S from './Detail.styled';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Link } from 'react-scroll';
+import { API } from '../../config';
 import ProjectDetailHeader from './ProjectDetailHeader';
 import ProjectDetail from './ProjectDetail';
 import ProjectIntroduce from './ProjectIntroduce';
@@ -10,15 +13,16 @@ import {
   faShareNodes,
 } from '@fortawesome/free-solid-svg-icons';
 import ProjectBudjet from './ProjectBudjet';
-import { Link } from 'react-scroll';
-import axios from 'axios';
 import Footer from '../../components/Footer/Footer';
+import * as S from './Detail.styled';
 
 const Detail = () => {
   const [detailData, setDetailData] = useState({});
+  const params = useParams();
 
   useEffect(() => {
-    axios.get('data/detailData.json').then(res => {
+    const product_id = params.id;
+    axios.get(`${API.DETAIL}/${product_id}`).then(res => {
       setDetailData(res.data.results);
     });
   }, []);
@@ -26,7 +30,6 @@ const Detail = () => {
   const {
     title,
     category,
-    thumbmail,
     target_amount,
     total_amount,
     price,
@@ -50,8 +53,7 @@ const Detail = () => {
   let totalPrice;
   let discount;
   let targetAmount;
-
-  if (detailData.total_amount) {
+  if (detailData.target_amount) {
     totalPrice = total_amount.toLocaleString('ko-KR', {
       style: 'currency',
       currency: 'KRW',
@@ -77,7 +79,7 @@ const Detail = () => {
             </S.DetailTitle>
             <S.DetailBody>
               <S.ImgBox>
-                <S.Img src={thumbmail} alt="items" />
+                <S.Img src={images[0].url} alt="items" />
               </S.ImgBox>
               <S.BodyDetail>
                 <S.TotalFunding>

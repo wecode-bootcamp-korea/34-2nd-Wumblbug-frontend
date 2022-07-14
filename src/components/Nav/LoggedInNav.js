@@ -25,7 +25,7 @@ const LoggedInNav = () => {
     axios
       .get(`${URL}/users`, {
         headers: {
-          Authorizaion: token,
+          Authorization: token,
         },
       })
       .then(res => {
@@ -82,6 +82,7 @@ const Header = styled.header`
   padding: 0px 150px;
   box-shadow: 0px 3px 3px 0px #f4f4f4;
   z-index: 999;
+  background-color: white;
 `;
 
 const NavBar = styled.nav`

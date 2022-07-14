@@ -22,7 +22,9 @@ const Nav = () => {
         <ButtonBox>
           <GoToPost
             onClick={() => {
-              movePage('/post');
+              localStorage.getItem('token')
+                ? movePage('/post')
+                : alert('로그인을 해주세요');
             }}
           >
             프로젝트 올리기
@@ -48,6 +50,7 @@ const Header = styled.header`
   padding: 0px 150px;
   box-shadow: 0px 3px 3px 0px #f4f4f4;
   z-index: 999;
+  background-color: white;
 `;
 
 const NavBar = styled.nav`

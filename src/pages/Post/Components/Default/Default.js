@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './Default.styled';
 import ProjectSection from '../ProjectSection/ProjectSection';
+import * as S from './Default.styled';
 
 const Default = ({ info, saveInfo, category, setCategory, setImage }) => {
   const onChangeImg = e => {

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import NewCarousel from './NewCarousel';
 import FundingList from './FundingList';
-import Nav from '../../components/Nav/Nav';
 import LoggedInNav from '../../components/Nav/LoggedInNav';
-import styled from 'styled-components';
+import Nav from '../../components/Nav/Nav';
+import Footer from '../../components/Footer/Footer';
+import { API } from '../../config';
 
 const Main = () => {
   const [images, setImages] = useState([]);
@@ -16,42 +18,28 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    fetch('/data/fundingData.json')
-      .then(response => response.json())
-      .then(result =>
-        setFundingItems(
-          result.results.sort(
-            (prev, current) => new Date(current.date) - new Date(prev.date)
-          )
-        )
-      );
-  }, []);
-
-  useEffect(() => {
-    // fetch('http://10.58.7.118:8000/projects?order=recent')
-    fetch('data/funding')
+    fetch(API.GET_ITEMS)
       .then(res => res.json())
       .then(data => {
         setFundingItems(data.results);
       });
   }, []);
 
-  // BACKEND와의 통신 시, 필요
-  // useEffect(() => {
-  // fetch(
-  // 10.58.7.118:8000/projects?order=recent')
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     setFundingItems(data);
-  //   });
+  const sortByRecent = () => {
+    fetch(API.SORT_RECENT)
+      .then(res => res.json())
+      .then(data => {
+        setFundingItems(data.results);
+      });
+  };
 
-  // const sortByLikes = () => {
-  //   fetch('http://10.58.7.118:8000/projects?order=likes')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setFundingItems(data.results);
-  //     }, []);
-  // };
+  const sortByLikes = () => {
+    fetch(API.SORT_LIKES)
+      .then(res => res.json())
+      .then(data => {
+        setFundingItems(data.results);
+      });
+  };
 
   return (
     <>
@@ -59,10 +47,13 @@ const Main = () => {
       <MainWrapper>
         <NewCarousel images={images} />
         <FundingList
+          sortByLikes={sortByLikes}
+          sortByRecent={sortByRecent}
           setFundingItems={setFundingItems}
           fundingItems={fundingItems}
         />
       </MainWrapper>
+      <Footer />
     </>
   );
 };

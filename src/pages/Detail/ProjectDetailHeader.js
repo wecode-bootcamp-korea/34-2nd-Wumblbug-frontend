@@ -1,6 +1,6 @@
 import React from 'react';
-import './ProjectDetailHeader.styled';
 import * as S from './ProjectDetailHeader.styled';
+
 const ProjectDetailHeader = () => {
   return (
     <S.ProjectDetailNav>

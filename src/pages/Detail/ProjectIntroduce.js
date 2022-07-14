@@ -9,7 +9,6 @@ const ProjectIntroduce = ({ title, introduction, image_url, price }) => {
         <S.IntroduceTitleBox>
           <S.IntroduceTitle> | 프로젝트 소개 </S.IntroduceTitle>
         </S.IntroduceTitleBox>
-
         <S.IntroduceTextBox>
           <S.IntroduceTextSpan>{introduction}</S.IntroduceTextSpan>
           {image_url.map(({ url, id }) => {

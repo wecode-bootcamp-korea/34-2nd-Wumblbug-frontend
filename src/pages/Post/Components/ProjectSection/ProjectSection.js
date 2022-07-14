@@ -8,7 +8,7 @@ const ProjectSection = ({
   contentsRightName,
 }) => {
   return (
-    <S.ProjectSectionWrap>
+    <div>
       <S.ContentsWrap>
         <S.ContentInfoWrap>
           <S.ContentsName>{contentsName}</S.ContentsName>
@@ -21,7 +21,7 @@ const ProjectSection = ({
           </S.ContentsRight>
         </S.ContentsRightWrap>
       </S.ContentsWrap>
-    </S.ProjectSectionWrap>
+    </div>
   );
 };
 

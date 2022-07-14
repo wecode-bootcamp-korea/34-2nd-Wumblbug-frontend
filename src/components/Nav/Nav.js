@@ -14,7 +14,7 @@ const Nav = () => {
       <NavBar>
         <LogoBox
           onClick={() => {
-            movePage('/main');
+            movePage('/');
           }}
         >
           <LogoImg src="/images/Nav/logo.png" alt="" />

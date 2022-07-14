@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { URL } from '../../config';
+import { API } from '../../config';
 import ProfileOptionBlock from './ProfileOptionBlock';
 
 const LoggedInNav = () => {
@@ -20,16 +20,15 @@ const LoggedInNav = () => {
   const showOptions = () => {
     setIsShowOption(prev => !prev);
   };
-
   useEffect(() => {
     axios
-      .get(`${URL}/users`, {
+      .get(API.USER_INFO, {
         headers: {
           Authorization: token,
         },
       })
       .then(res => {
-        setUserData(res.data.RESULT);
+        setUserData(res.data.result);
       })
       .catch(err => {
         console.error(err);
@@ -45,7 +44,7 @@ const LoggedInNav = () => {
       <NavBar>
         <LogoBox
           onClick={() => {
-            movePage('/main');
+            movePage('/');
           }}
         >
           <LogoImg src="/images/Nav/logo.png" alt="" />

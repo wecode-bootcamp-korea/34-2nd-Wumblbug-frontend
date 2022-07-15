@@ -73,15 +73,92 @@
 
 ### Nav, Footer
 
-## []
+#### [Footer - 레이아웃 구성]
 
--
+- 초기 기획단계에서 Footer에는 기능을 빼기로 결정해 styled-components를 활용해 기능없이 레이아웃만 구성
+
+#### [Nav - 로그인 되었을 때 Nav기능 구현]
+
+- Nav로그인이 되어 있지 않을때와 되어있을 때 구분 작업
+
+  - `<Nav />`와 `<LoggendInNav />`로 컴포넌트 두 개로 나누어 작업
+  - `localStorage.getItem('token')`을 활용해 로그인이 되어있는지 아닌지 여부 판단(Main.js에 명시)
+
+    ```jsx
+    // Main.js의 상단에 명시
+    {
+      !localStorage.getItem('token') ? <Nav /> : <LoggedInNav />;
+    }
+    ```
+
+  - 그 후 user의 데이터를 받아와 user_nickname을 뽑아와 로그인 한 유저에 대해 이름을 표시
+
+    ```jsx
+    // userData가 통신을 통해 수신받을 때 렌더링하는 조건 추가
+    // 데이터가 들어오기 전에 렌더링을 해버리면 없는상태만 유지
+    {
+      userData && <UserName>{userData.nickname}</UserName>;
+    }
+    ```
+
+- ProfileOptionBlock이라는 컴포넌트를 만들어 로그인이 안돼있을 때는 Login페이지로 이동하고 로그인이 돼있을 때는 로그아웃을 시키는 기능을 구현
+
+  - 로그인이 안돼있을 때
+
+    ```jsx
+    <GoToLogin
+      onClick={() => {
+        movePage('/login');
+      }}
+    >
+      <ProfileIcon src="images/Nav/profileIcon.png" alt="profile" />
+      <LoginButton>로그인/회원가입</LoginButton>
+    </GoToLogin>
+    ```
+
+  - 로그인이 돼있을 때
+
+    ```jsx
+    // 로그아웃 기능을 하는 함수
+    const onLogOut = () => {
+      localStorage.removeItem('token');
+    };
+
+    // 로그아웃 버튼에 함수적용
+    <LogoutButton
+      onClick={() => {
+        onLogOut();
+      }}
+    >
+      로그아웃
+    </LogoutButton>;
+    ```
 
 ### Login
 
-## []
+#### [Login - 환경 변수 제작 및 활용]
 
--
+- .env라는 파일을 만들어 로그인 기능을 구현하기 위한 REST_API키값을 저장하고 .gitignore에 추가하여 commit, push되는 상황을 방지
+  ![.env](https://user-images.githubusercontent.com/97019802/179177440-931d9292-775a-4da2-820e-7e4c7028ea02.png)
+- 제작한 환경변수를 활용하여 KAKAO_AUTH_URL이라는 변수에 담아 활용
+
+  ```js
+  const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+
+  export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  ```
+
+- 기존에는 a태그를 활용해서 KAKAO_AUTH_URL로 가려고 했으나 a태그의 특성상 마우스를 올렸을 때 URL이 그대로 노출되는 현상이 발생함
+
+  - 해당 문제를 해결하기 위해 button태그로 바꿔서 useNavigate를 활용해봤는데 useNavigate는 호스트 URL을 바꿔주지 못하고 그 뒤에 이어서 붙여버리는 문제가 발생
+  - window객체를 활용해서 문제를 해결
+
+    ```js
+    const goToKakao = () => {
+      window.open(KAKAO_AUTH_URL, '_self');
+    };
+    ```
 
 ### Detail
 
@@ -93,9 +170,7 @@
 
 ## []
 
--
-
----
+- ***
 
 ## 💡 느낀점
 

@@ -57,9 +57,9 @@
 
 ## ⌨️ 기술 스택
 
-|                                                   Language                                                    |                                                                                                                                                                                                                               Library                                                                                                                                                                                                                                |
-| :-----------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javscript&logoColor=white"> | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <br /> <img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"> <img src="https://img.shields.io/badge/antdesign-0170FE?style=for-the-badge&logo=antdesign&logoColor=white"> |
+|                                                   Language                                                    |                                                                                                                                                                                                                                 Library                                                                                                                                                                                                                                  |
+| :-----------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javscript&logoColor=white"> | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <br /> <img src="https://img.shields.io/badge/reactrouter-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"><br /><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/antdesign-0170FE?style=for-the-badge&logo=antdesign&logoColor=white"> |
 
 ---
 
@@ -176,7 +176,7 @@
 
 - 박보현:
 
-- 박희주:
+- 박희주: Nav와 Footer는 큰 기능이 없어 예상보다 쉽게 끝냈고 카카오로그인 API를 사용하면서 소셜로그인이 어떤식으로 구동되는지 알게되어 유익했고 환경변수를 활용해 민감정보를 숨긴다는 개념을 처음 이해하게 되었음
 
 - 백광현:
 

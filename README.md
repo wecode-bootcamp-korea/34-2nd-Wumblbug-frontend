@@ -149,7 +149,7 @@
   export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   ```
 
-- 기존에는 a태그를 활용해서 KAKAO_AUTH_URL로 가려고 했으나 a태그의 특성상 마우스를 올렸을 때 URL이 그대로 노출되는 현상이 발생함
+- 기존에는 a태그를 활용해서 KAKAO_AUTH_URL로 가려고 했으나 a태그의 특성상 마우스를 올렸을 때 URL이 그대로 노출되는 현상이 발생
 
   - 해당 문제를 해결하기 위해 button태그로 바꿔서 useNavigate를 활용해봤는데 useNavigate는 호스트 URL을 바꿔주지 못하고 그 뒤에 이어서 붙여버리는 문제가 발생
   - window객체를 활용해서 문제를 해결
